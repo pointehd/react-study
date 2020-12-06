@@ -13,3 +13,4 @@
 $ npx create-react-app begin-react
 ```
 npx 를 이용하여 리액트 프로젝트 시작 
+1.3 리엑트 첫 컴포넌트 (완료)

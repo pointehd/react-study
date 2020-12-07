@@ -10,6 +10,10 @@ function Hello(props){
     };
     return (
         <>
+            {props.isSpecial ? <div>*************<br/></div> : null}
+            {/**JSX 에서 null, false, undefined 를 렌더링하게 된다면 아무것도 나타나지 않게 됩니다. */}
+            {props.isSpecial && <div>*************<br/></div>}
+            {/** && 를 사용하면 뒤에 있는것만 출력됨 true 일 때 */}
             <div>properties</div>
             <div style={{color:props.color}}>{props.name}</div>
             <div>hellow react</div>

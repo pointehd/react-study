@@ -1,10 +1,13 @@
+import react from 'react';
 import Hello from './Hello';
+import Wrapper from './Wrapper';
 
 function App() {
   return (
-    <div className="App">
-      <Hello/>
-    </div>
+    <Wrapper>
+      <Hello name="hello react" color="red"/>
+      
+    </Wrapper>
   );
 }
 

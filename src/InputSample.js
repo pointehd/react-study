@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 function InputSample(){
     const [text, setText] = useState('');
@@ -6,6 +6,7 @@ function InputSample(){
         name : '',
         nickname: ''
     });
+    const nameInput = useRef();
 
     const {name, nickname} = inputs; // 비구조화 할당을 통해 값 추출
     
@@ -26,6 +27,7 @@ function InputSample(){
             name:'',
             nickname:''
         });
+        nameInput.current.focus();
     }
     const onReset = () =>{
         setText('');
@@ -38,7 +40,7 @@ function InputSample(){
             <div>
                 <b>값 : {text}</b>
             </div>
-            <input name="name" onChange={onChanges} value={name} placeholder="이름"/>
+            <input ref={nameInput} name="name" onChange={onChanges} value={name} placeholder="이름"/>
             <input name="nickname" onChange={onChanges} value={nickname} placeholder="닉네임"/>
             <button onClick={onResets}>전체 초기화</button>
             <div>

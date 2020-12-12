@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import './App.css'
 import Hello2 from './Hello2';
 

@@ -1,4 +1,4 @@
-import react, {useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Hello from './Hello';
 import Wrapper from './Wrapper';
 import Counter from './Countrer';
@@ -67,7 +67,7 @@ function App() {
   const onToggle = (id) =>{
     setUsers(
       users.map(user =>
-          user.id == id ? {...user, active:!user.active} : user
+          user.id === id ? {...user, active:!user.active} : user
         )
     );
   };

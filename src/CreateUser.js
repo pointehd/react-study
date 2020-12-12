@@ -1,10 +1,15 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 
 function CreateUser({userName, email, onChange, onCreate}) {
     const userInput = useRef();
+    useEffect(()=>{
+        // 원하던게 아님. ㅠㅠ
+        // userInput.current.focus();
+    });
     const emailEnter = (e) =>{
-        if(e.charCode==13){
+        if(e.charCode ===13){
             onCreate();
+            userInput.current.focus();
         }
     }
     return (

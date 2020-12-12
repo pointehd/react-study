@@ -11,6 +11,9 @@
 > ~13. 배열에 항목 추가하기~   
 > ~14. 배열에 항목 제거하기~   
 > ~15. 배열에 항목 수정하기~   
+> ~16.museEffect를 사용하여 마운트/언마운트/업데이트시 할 작업 설정하기~   
+[https://rinae.dev/posts/a-complete-guide-to-useeffect-ko]https://rinae.dev/posts/a-complete-guide-to-useeffect-ko   
+useEffect 중요+어려운 개념 읽어보기 
 
 * 20.12.10 : 비구조화 할당 너무 어렵.. 어제부터했는데   
 불변성 지키기 ! 너무 재미있다 리액트! 했던것들인데 왜이렇게 재밌고 정리되는느낌일까요?  

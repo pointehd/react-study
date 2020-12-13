@@ -17,4 +17,4 @@ Hello2.defaultProps = {
     name: 'namenamename'
 }
 
-export default Hello2;
+export default React.memo(Hello2);

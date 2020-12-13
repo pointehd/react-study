@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-function User({user, onRemove, onToggle}){
+const User = React.memo(function User({user, onRemove, onToggle}){
     /***
      * mount 시에 하는 작업
      *  props 로 받은 값을 컴포넌트의 로컬 상태로 설정
@@ -39,7 +39,7 @@ function User({user, onRemove, onToggle}){
         </div>
     )
 }
-
+);
 function UserList({users, onRemove, onToggle}){
     
     return (
@@ -54,4 +54,4 @@ function UserList({users, onRemove, onToggle}){
     )
 }
 
-export default UserList;
+export default React.memo(UserList);

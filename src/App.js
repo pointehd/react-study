@@ -122,7 +122,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onToggle={onToggle} onRemove={onRemove}/>
-      <div>활성 사용자 수 : 0</div>
+      <div>활성 사용자 수 : {count}</div>
       {/**
        * 
       <InputSample/>

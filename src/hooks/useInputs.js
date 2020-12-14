@@ -1,3 +1,4 @@
+/*
 import {useState, useCallback} from 'react';
 
 function useInputs(initialForm){
@@ -6,38 +7,37 @@ function useInputs(initialForm){
         const {name, value} = e.target;
         setFrom(from =>({...from, [name]:value}));
     });
-    const reset = useCallback(() => setFrom(initialForm), [initialForm]);
-    return [from, onChage, reset];
+    const onReset = useCallback(() => setFrom(initialForm), [initialForm]);
+    return [from, onChage, onReset];
 }
 
-export default useInputs;
-/*
-import {useReducer, useCallback} from 'react';
-
-function reducer(state, action){
-    switch(action.type){
-        case 'CHANGE_INPUT':
-            return {
-                ...state,
-                [action.name] : action.value
-            }
-        case 'RESET_INPUT':
-            return action.initialFrom;
-    }
-}
-function useInputs(initialFrom){
-    const [state, dispatch] = useReducer(reducer, initialFrom);
-    const onChage = useCallback((e) =>{
-        dispatch({
-            type:'CHAGNE_INPUT',
-            name :e.name,
-            value: e.value
-        })
-    });
-    const onReset = useCallback(()=>{
-        dispatch({initialFrom});
-    });
-    return [state, onChage, onReset];
-}
 export default useInputs;
 */
+import { useReducer, useCallback } from 'react';
+function reducer(state, action) {
+    switch (action.type) {
+        case 'CHANGE':
+            return {
+                    ...state,
+            [action.name]: action.value
+            };
+        case 'RESET':
+            return Object.keys(state).reduce((acc, current) => {
+            acc[current] = '';
+            return acc;
+            }, {});
+        default:
+          return state;
+    }
+}
+function useInputs(initialForm) {
+const [form, dispatch] = useReducer(reducer, initialForm);
+// change
+const onChange = useCallback(e => {
+const { name, value } = e.target;
+dispatch({ type: 'CHANGE', name, value });
+}, []);
+const reset = useCallback(() => dispatch({ type: 'RESET' }), []);
+return [form, onChange, reset];
+}
+export default useInputs;

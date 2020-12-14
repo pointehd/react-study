@@ -64,7 +64,7 @@ function reducer(state, action){
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { users } = state;
-  const [{ userName, email }, onChange, reset] = useInputs({
+  const [{ userName, email }, onChange, onReset] = useInputs({
     userName:'',
     email:''
   });
@@ -78,6 +78,7 @@ function App() {
         email
       }
     });
+    onReset();
     nextId.current +=1;
   },[userName, email]);
   const onToggle = useCallback(id => {

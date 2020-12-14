@@ -6,15 +6,13 @@ import InputSample from './InputSample';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 
+import useInputs from './hooks/useInputs'
+
 function countActiveUsers(users){
   console.log('활성 사용자 수를 세는중...');
   return users.filter(user => user.active).length;
 }
 const initialState = {
-  inputs: {
-    userName :'',
-    email : ''
-  },
   users : [
     {
       id:1,
@@ -39,21 +37,11 @@ const initialState = {
 
 function reducer(state, action){
   switch(action.type){
-    case 'CHANGE_INPUT':
-      return {
-        ...state,
-        inputs : {
-          ...state.inputs,
-          [action.name] : action.value
-        }
-      };
-
     case 'CREATE_USER':
       // user : state.users.concat(action.user);
       // equals
       // user : [...state.users, users];
       return {
-        inputs: initialState.inputs,
         users: state.users.concat(action.user)
       };
     case 'TOGGLE_USER':
@@ -76,18 +64,11 @@ function reducer(state, action){
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { users } = state;
-  const { userName, email } = state.inputs;
+  const [{ userName, email }, onChange, reset] = useInputs({
+    userName:'',
+    email:''
+  });
   const nextId = useRef(4);
-  const onChange = useCallback(
-    e => {
-      const {name, value} = e.target;
-      dispatch({
-        type:'CHANGE_INPUT',
-        name,
-        value
-      });
-    },[]
-  );
   const onCreate = useCallback(() => {
     dispatch({
       type:'CREATE_USER',

@@ -5,6 +5,7 @@ import Counter from './Countrer';
 import InputSample from './InputSample';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+import produce from 'immer';
 
 import useInputs from './hooks/useInputs'
 
@@ -41,21 +42,19 @@ function reducer(state, action){
       // user : state.users.concat(action.user);
       // equals
       // user : [...state.users, users];
-      return {
-        users: state.users.concat(action.user)
-      };
+      return produce(state, draft =>{
+        draft.users.push(action.user);
+      });
     case 'TOGGLE_USER':
-      return {
-        ...state,
-        users: state.users.map(user =>
-          user.id === action.id ? { ...user, active: !user.active } : user
-        )
-      };
+      return produce(state, draft =>{
+        const user = draft.users.find(user => user.id === action.id);
+        user.active = !user.active;
+      });
     case 'REMOVE_USER':
-      return {
-        ...state,
-        users: state.users.filter(user => user.id !== action.id)
-      };
+      return produce(state, draft =>{
+        const index = draft.users.findIndex(user => user.id == action.id);
+        draft.users.splice(index,1);
+      });
     default:
       return state;
   }

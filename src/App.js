@@ -61,49 +61,19 @@ function reducer(state, action){
   }
 }
 
+export const UseDispatch = React.createContext(null);
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { users } = state;
-  const [{ userName, email }, onChange, onReset] = useInputs({
-    userName:'',
-    email:''
-  });
-  const nextId = useRef(4);
-  const onCreate = useCallback(() => {
-    dispatch({
-      type:'CREATE_USER',
-      user:{
-        id: nextId.current,
-        username : userName,
-        email
-      }
-    });
-    onReset();
-    nextId.current +=1;
-  },[userName, email]);
-  const onToggle = useCallback(id => {
-    dispatch({
-      type: 'TOGGLE_USER',
-      id
-    });
-  }, []);
+  
 
-  const onRemove = useCallback(id => {
-    dispatch({
-      type: 'REMOVE_USER',
-      id
-    });
-  }, []);
   const count = useMemo(() => countActiveUsers(users), [users]);
   return (
-    <>
+    <UseDispatch.Provider value={dispatch}>
       <CreateUser 
-        userName={userName}
-        email={email}
-        onChange={onChange}
-        onCreate={onCreate}
       />
-      <UserList users={users} onToggle={onToggle} onRemove={onRemove}/>
+      <UserList users={users}/>
       <div>활성 사용자 수 : {count}</div>
       {/**
        * 
@@ -116,7 +86,7 @@ function App() {
        * isSpecial={ture}  isSpecial 과 같음  
        * 신기하넹..
       */}
-    </>
+    </UseDispatch.Provider>
   );
 }
 

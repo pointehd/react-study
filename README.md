@@ -6,6 +6,10 @@
 * 실행방법 yarn start
 
 ## 개발기록
+* 20.12.15 : 숙제 내힘으로 대체 어케하는거징. ㅠㅠ
+> ~22. Contact API를 사용한 전역 값 관리~    
+> 느낌이오는것도 같고 ㅠㅠ `useContext` `React.createContext` 화이팅!   
+
 * 20.12.14 : 숙제를 하지못했다.ㅋㅋ
 > ~21. 커스텀 Hooks 만들기~
 > 숙제 ㅠㅠ useReducer 사용하기 실패 ㅠㅠ    

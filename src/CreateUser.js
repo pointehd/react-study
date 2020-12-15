@@ -1,11 +1,28 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useContext} from 'react';
+import useInputs from './hooks/useInputs';
+import { UseDispatch } from './App';
 
-function CreateUser({userName, email, onChange, onCreate}) {
-    const userInput = useRef();
-    useEffect(()=>{
-        // 원하던게 아님. ㅠㅠ
-        // userInput.current.focus();
+
+function CreateUser() {
+    const [{userName, email}, onChange, onReset] = useInputs({
+        userName:'',
+        email:''
     });
+    const nextId = useRef(4);
+    const dispatch = useContext(UseDispatch);
+    const onCreate = () =>{
+        dispatch({
+            type:'CREATE_USER',
+            user:{
+                id: nextId.current,
+                username : userName,
+                email
+            }
+        });
+        onReset();
+        nextId.current += 1;
+    }
+    const userInput = useRef();
     const emailEnter = (e) =>{
         if(e.charCode ===13){
             onCreate();

@@ -1,6 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
+import {UseDispatch} from './App';
 
-const User = React.memo(function User({user, onRemove, onToggle}){
+const User = React.memo(function User({user}){
+    const dispatch = useContext(UseDispatch);
     /***
      * mount 시에 하는 작업
      *  props 로 받은 값을 컴포넌트의 로컬 상태로 설정
@@ -30,17 +32,27 @@ const User = React.memo(function User({user, onRemove, onToggle}){
                 cursor :'pointer',
                 color: user.active ? 'green' : 'black'
             }}
-                onClick={()=>onToggle(user.id)}
+                onClick={()=>{
+                    dispatch({
+                        type: 'TOGGLE_USER',
+                        id : user.id
+                    });
+                }}
             >
                 {user.username}
             </b>
             <span>({user.email})</span>
-            <button onClick={()=>onRemove(user.id)}>삭제</button>
+            <button onClick={()=>{
+                dispatch({
+                    type: 'REMOVE_USER',
+                    id : user.id
+                });
+            }}>삭제</button>
         </div>
     )
 }
 );
-function UserList({users, onRemove, onToggle}){
+function UserList({users}){
     
     return (
         <div>
@@ -48,7 +60,7 @@ function UserList({users, onRemove, onToggle}){
              * map 을 이용하여 렌더링
              **/}
             {users.map(user =>(
-                <User key={user.id}  user={user} onRemove={onRemove} onToggle={onToggle}/>
+                <User key={user.id}  user={user}/>
             ))}
         </div>
     )
